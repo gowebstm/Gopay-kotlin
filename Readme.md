@@ -29,7 +29,7 @@ Add this dependency to your project's build file:
 // Add dependencies
     dependencies {
         // Add implementation dependency for GoPay SDK
-        implementation 'com.github.gowebstm:Gopay-kotlin:1.0.0'
+        implementation 'com.github.gowebstm:Gopay-kotlin:1.0.1'
     }
 ```
 
@@ -50,7 +50,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.github.gowebstm</groupId>
         <artifactId>GoPay-kotlin</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 

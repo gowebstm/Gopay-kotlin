@@ -38,9 +38,26 @@ Add this dependency to your project's build file:
 Add this dependency to your project's POM:
 
 ```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+```xml
 <dependency>
     <groupId>com.github.gowebstm</groupId>
         <artifactId>GoPay-kotlin</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
+
+## Response Code
+| Code    | Description |
+| -------- | ------- |
+| 200 | Successful authentication    |
+| 400 | Bad request authentication     |
+| 401    | Missing required parameters    |
+| 500    | Bad request error    |

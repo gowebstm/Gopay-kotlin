@@ -38,9 +38,9 @@ Add this dependency to your project's build file:
 Add this dependency to your project's POM:
 
 ```xml
-	<dependency>
-        <groupId>com.github.gowebgithub</groupId>
-            <artifactId>GoPay-SDK</artifactId>
-        <version>1.0.2</version>
-    </dependency>
+<dependency>
+    <groupId>com.github.gowebgithub</groupId>
+        <artifactId>GoPay-SDK</artifactId>
+    <version>1.0.2</version>
+</dependency>
 ```

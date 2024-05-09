@@ -63,6 +63,12 @@ dependencies {
     //Lifecycle
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+
+    //Mockito
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+
+    //Custom Chrome Tab
+    implementation 'androidx.browser:browser:1.8.0'
 }
 
 afterEvaluate {

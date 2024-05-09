@@ -15,14 +15,17 @@ import org.json.JSONObject
 class AccessGopay private constructor(context: Context?) {
 
     private var accessGopayContext: Context? = context?.applicationContext
-    private var gopayToken: String? = null
-    private var gopayKey: String? = null
-    private var gopayDomain: String? = null
-    private var gopayPackageName: String? = null
 
     companion object {
 
+        var gopayToken: String? = null
+        var gopayKey: String? = null
+        var gopayDomain: String? = null
+        var gopayPackageName: String? = null
+
         private var accessGopay: AccessGopay? = null
+
+        var isVerified: Boolean = false
 
         fun getInstance(context: Context?): AccessGopay {
             if (accessGopay == null) {
@@ -67,7 +70,8 @@ class AccessGopay private constructor(context: Context?) {
             hashMap[Constants.KEY_AUTH_KEY] = gopayKey!!
             hashMap[Constants.KEY_AUTH_TOKEN] = gopayToken!!
             hashMap[Constants.KEY_AUTH_PACKAGE_NAME] = gopayPackageName!!
-            val apiService = RetrofitHelper.getInstance(accessGopayContext!!).create(ApiService::class.java)
+            val apiService =
+                RetrofitHelper.getInstance(accessGopayContext!!).create(ApiService::class.java)
             if (NetworkUtils.isNetworkAvailable(accessGopayContext)) {
                 try {
                     val result = withContext(Dispatchers.IO) {
@@ -77,6 +81,12 @@ class AccessGopay private constructor(context: Context?) {
                         is ApiResponse.Success -> {
                             data = result.data
                             data.let { res ->
+                                isVerified = res.code == 200
+                                GopayCookieManager.saveCredentials(
+                                    authKey = res.authKey,
+                                    authToken = res.authToken,
+                                    packageName = res.packageName
+                                )
                                 val response = JSONObject().apply {
                                     put("code", res.code)
                                     put("appName", res.appName)
@@ -90,11 +100,10 @@ class AccessGopay private constructor(context: Context?) {
                                 Log.i("Gopay Verification", "Success: $data")
                             }
                         }
+
                         is ApiResponse.Error -> {
-                            val errorCode = result.code
-                            val errorMessage = result.message
                             data = result.data
-                            Log.e("Gopay Verification", "Error: $errorCode - $errorMessage")
+                            Log.e("Gopay Verification", "Error: ${data?.code}")
                         }
                     }
                 } catch (e: Exception) {

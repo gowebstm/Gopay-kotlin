@@ -22,8 +22,9 @@ class MainActivity : AppCompatActivity() {
             result?.let {
                 Toast.makeText(this@MainActivity, "Verification successful!", Toast.LENGTH_SHORT).show()
             }
-        }
 
+            Gopay().PaymentInit(this@MainActivity).createOrder("Ease","8585814444","", "gomatka.co",1,"Test Payment")
+        }
     }
 
 }

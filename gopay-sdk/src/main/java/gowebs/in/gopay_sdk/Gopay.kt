@@ -8,4 +8,8 @@ class Gopay {
         return AccessGopay.getInstance(context)
     }
 
+    fun PaymentInit(context: Context?): CheckOut {
+        return CheckOut.getInstance(context)
+    }
+
 }

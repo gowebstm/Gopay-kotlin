@@ -32,10 +32,10 @@ class ApiResponseCallAdapterFactory : CallAdapter.Factory() {
                 if (response.isSuccessful) {
                     ApiResponse.Success(response.body()!!)
                 } else {
-                    ApiResponse.Error(response.code(), response.message())
+                    ApiResponse.Error(response.code(),response.body().toString())
                 }
             } catch (e: Exception) {
-                ApiResponse.Error(0, e.message ?: "Unknown error")
+                ApiResponse.Error(0, "Unknown error")
             }
         }
     }
